@@ -47,6 +47,16 @@ function swapPhoto() {
         mCurrentIndex += mImages.length;
     }
 
+    // The attr() method will set and return attributes and values of the selected elements
+    $("#photo").attr('src', mImages[mCurrentIndex].path);
+
+    // Ex: .location is a class accessing from HTML file
+    // .text is a property that will set or return text value
+    // Ex: It will get the text from the image file and will display on web based on the image is selected
+    $(".location").text('Location: '+mImages[mCurrentIndex].location);
+    $(".description").text('Description: '+mImages[mCurrentIndex].description);
+    $(".date").text('Date: '+mImages[mCurrentIndex].date);
+
 	console.log('swap photo');
 }
 
