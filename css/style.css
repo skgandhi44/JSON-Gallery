@@ -56,6 +56,11 @@ body {
 	width: 42px;
 }
 
+#prevPhoto:hover{
+    opacity: 0.8;
+}
+
+
 #nextPhoto {
 	height: 42px;
 	width: 42px;
