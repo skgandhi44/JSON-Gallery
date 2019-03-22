@@ -40,6 +40,10 @@ body {
 	box-shadow: 1px 3px 20px 0px;
 }
 
+#photo{
+	height: 395px;
+	width: 500px;
+}
 
 .banner {
 	text-align: center;
