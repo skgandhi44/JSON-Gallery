@@ -46,6 +46,7 @@ var mCurrentIndex = 0;
 // XMLHttpRequest variable
 var mRequest = new XMLHttpRequest();
 
+
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
@@ -86,13 +87,13 @@ function GalleryImage() {
 	//3. the date when the photo was taken
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 
-	let image = {
+	let img = {
         location:'location',
         description:'description',
         date:'date',
 	};
 
-	document.getElementsByClassName("details").innerHTML = image.location + " " + image.description + " " + image.date;
+	document.getElementsByClassName("details").innerHTML = img.location + " " + img.description + " " + img.date;
 }
 
 GalleryImage();
