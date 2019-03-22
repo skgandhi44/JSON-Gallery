@@ -31,17 +31,24 @@ function animate() {
 }
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
+// Counter for the mImages array
+var mCurrentIndex = 0;
+
+
 
 function swapPhoto() {
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
+
+    // The if statement will check the length of mImages, and if the currentIndext is < than '0' it will increment
+    if(mCurrentIndex < 0){
+        mCurrentIndex += mImages.length;
+    }
+
 	console.log('swap photo');
 }
-
-// Counter for the mImages array
-var mCurrentIndex = 0;
 
 // XMLHttpRequest variable
 // Property contains the event handler to be called when the readystatechange event is fired
@@ -120,7 +127,7 @@ $(document).ready( function() {
 	// When click on the arrow the indicator will rotate 90 horizontally
     // The click() method attaches an event handler function to an HTML element
     // The function will is executed when the user clicks on the HTML element
-	$('.moreIndicator').click(function () {
+	$('.moreIndicator').onclick(function () {
 
 	    // The toggleClass() method toggles the arrow. Like turn it in on and off
 	    $("img.rot90").toggleClass("rot270", 3000);
@@ -129,11 +136,11 @@ $(document).ready( function() {
     });
 
 	// swapPhoto to next
-	$("#nextPhoto").click(function () {
+	$("#nextPhoto").onclick(function () {
         swapPhoto();
     });
 
-	$("#prevPhoto").click(function () {
+	$("#prevPhoto").onclick(function () {
        mCurrentIndex -= 2;
        swapPhoto();
        console.log(mCurrentIndex);
@@ -143,9 +150,7 @@ $(document).ready( function() {
 
 
 window.addEventListener('load', function() {
-	
 	console.log('window loaded');
-
 }, false);
 
 function GalleryImage(location, description, date, path) {
