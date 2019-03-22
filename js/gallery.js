@@ -59,7 +59,8 @@ mRequest.onreadystatechange = function() {
 
             // For loop will check the image length and if its less than 0, it will increment by 1,
             // and push() the description on the page
-            // Push() add things
+            // mJson.images[i] is an array which starts from 0
+            // Push() add thing
             for (var i = 0; i < mJson.images.length; i++) {
                 mImages.push(new GalleryImage(mJson.images[i].location, mJson.images[i].description,
                     mJson.images[i].date, mJson.images[i].path));
@@ -109,12 +110,37 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 	}
 }
 
+
+
 $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-	
+
+	// When click on the arrow the indicator will rotate 90 horizontally
+    // The click() method attaches an event handler function to an HTML element
+    // The function will is executed when the user clicks on the HTML element
+	$('.moreIndicator').click(function () {
+
+	    // The toggleClass() method toggles the arrow. Like turn it in on and off
+	    $("img.rot90").toggleClass("rot270", 3000);
+	    // The slideToggle method is used to switch between the slideup and slidedown states.
+	    $(".details").slideToggle(1000);
+    });
+
+	// swapPhoto to next
+	$("#nextPhoto").click(function () {
+        swapPhoto();
+    });
+
+	$("#prevPhoto").click(function () {
+       mCurrentIndex -= 2;
+       swapPhoto();
+       console.log(mCurrentIndex);
+    });
 });
+
+
 
 window.addEventListener('load', function() {
 	
