@@ -68,6 +68,7 @@ body {
 #nextPhoto {
 	height: 42px;
 	width: 42px;
+    margin-left: 550px;
 }
 
 #nextPhoto:hover{
