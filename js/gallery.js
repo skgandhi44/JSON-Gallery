@@ -52,6 +52,9 @@ var mImages = [];
 // Holds the retrived JSON information
 var mJson;
 
+// Requesting $_GET variable
+var $_GET = getQueryLocation(document.location.search);
+
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 
