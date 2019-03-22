@@ -31,6 +31,8 @@ body {
 	z-index: 3;
 	opacity: .8;
 	top: 0px;
+	margin-top:330px;
+	margin-left:300px
 }
 
 .thumbnail {
@@ -58,6 +60,8 @@ body {
 	height: 42px;
 	width: 42px;
 }
+
+
 
 .details p {
 	margin-top: 20px;
