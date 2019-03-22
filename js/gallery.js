@@ -15,8 +15,8 @@
 
 animate();
 
-var mLastFrameTime = 0;
-var mWaitTime = 5000; //time in ms
+let mLastFrameTime = 0;
+let mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
@@ -32,7 +32,7 @@ function animate() {
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 // Counter for the mImages array
-var mCurrentIndex = 0;
+let mCurrentIndex = 0;
 
 
 
@@ -57,6 +57,11 @@ function swapPhoto() {
     $(".description").text('Description: '+mImages[mCurrentIndex].description);
     $(".date").text('Date: '+mImages[mCurrentIndex].date);
 
+    mCurrentIndex++;
+    if(mCurrentIndex >= mImages.length){
+        mCurrentIndex = 0;
+    }
+
 	console.log('swap photo');
 }
 
@@ -66,7 +71,7 @@ function swapPhoto() {
 // mRequest will fetch information about the image.
 // Create a JSON object that contains the retrieved JSON string, a list of photo URL
 
-var mRequest = new XMLHttpRequest();
+let mRequest = new XMLHttpRequest();
 mRequest.onreadystatechange = function() {
     if (mRequest.readyState === 4 && mRequest.status === 200){
         try{
@@ -78,7 +83,7 @@ mRequest.onreadystatechange = function() {
             // and push() the description on the page
             // mJson.images[i] is an array which starts from 0
             // Push() add thing
-            for (var i = 0; i < mJson.images.length; i++) {
+            for (let i = 0; i < mJson.images.length; i++) {
                 mImages.push(new GalleryImage(mJson.images[i].location, mJson.images[i].description,
                     mJson.images[i].date, mJson.images[i].path));
             }
@@ -98,19 +103,19 @@ mRequest.send();
 
 
 // Array holding GalleryImage objects (see below).
-var mImages = [];
+let mImages = [];
 
 // Holds the retrived JSON information
-var mJson;
+let mJson;
 
 
 
 // Requesting $_GET variable
-var $_GET = getQueryLocation(document.location.search);
+let $_GET = getQueryLocation(document.location.search);
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 // The if and else statement checks if either one json file become true
-var mUrl;
+let mUrl;
 if($_GET["json"] == undefined) {
     mUrl = "images.short.json";
 } else {
