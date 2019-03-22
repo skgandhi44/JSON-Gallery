@@ -85,4 +85,14 @@ function GalleryImage() {
 	//2. description of photo
 	//3. the date when the photo was taken
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+
+	let image = {
+        location:'location',
+        description:'description',
+        date:'date',
+	};
+
+	document.getElementsByClassName("details").innerHTML = image.location + " " + image.description + " " + image.date;
 }
+
+GalleryImage();
