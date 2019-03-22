@@ -44,7 +44,40 @@ function swapPhoto() {
 var mCurrentIndex = 0;
 
 // XMLHttpRequest variable
+// Property contains the event handler to be called when the readystatechange event is fired
+// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
+// mRequest will fetch information about the image.
+// Create a JSON object that contains the retrieved JSON string, a list of photo URL
+
 var mRequest = new XMLHttpRequest();
+mRequest.onreadystatechange = function() {
+    if (mRequest.readyState === 4 && mRequest.status === 200){
+        try{
+            mJson = JSON.parse(mRequest.responseText);
+            console.log(mJson);
+            console.log(mJson.images[1].date);
+
+            // For loop will check the image length and if its less than 0, it will increment by 1,
+            // and push() the description on the page
+            // Push() add things
+            for (var i = 0; i < mJson.images.length; i++) {
+                mImages.push(new GalleryImage(mJson.images[i].location, mJson.images[i].description,
+                    mJson.images[i].date, mJson.images[i].path));
+            }
+
+            // the catch will check for error and will display message,
+            // if something is wrong in try, when requesting image descriptions
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+};
+
+// The XMLHttpRequest method open() initializes a newly-created request, or re-initializes an existing one.
+mRequest.open("GET", mUrl, true);
+// The XMLHttpRequest method send() the request to the server
+mRequest.send();
+
 
 // Array holding GalleryImage objects (see below).
 var mImages = [];
@@ -52,12 +85,12 @@ var mImages = [];
 // Holds the retrived JSON information
 var mJson;
 
+
+
 // Requesting $_GET variable
 var $_GET = getQueryLocation(document.location.search);
-
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-
 // The if and else statement checks if either one json file become true
 var mUrl;
 if($_GET["json"] == undefined) {
