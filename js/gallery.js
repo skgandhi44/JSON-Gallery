@@ -15,7 +15,6 @@
 
 animate();
 
-let mLastFrameTime = 0;
 let mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
@@ -34,6 +33,17 @@ function animate() {
 
 // Counter for the mImages array
 let mCurrentIndex = 0;
+
+let mLastFrameTime = 0;
+
+// Array holding GalleryImage objects (see below).
+let mImages = [];
+
+// Holds the retrieved JSON information
+let mJson;
+
+
+
 function swapPhoto() {
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
@@ -62,13 +72,6 @@ function swapPhoto() {
 
 	console.log('swap photo');
 }
-
-// Array holding GalleryImage objects (see below).
-let mImages = [];
-
-// Holds the retrieved JSON information
-let mJson;
-
 
 
 // Requesting $_GET variable
@@ -130,10 +133,12 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 	}
 }
 
+makeGalleryImageOnloadCallback();
+
 
 $(document).ready( function() {
     //this initially hides the photos' metadata information
-    let jQuery = $('.details').eq(0).hide();
+    $('.details').eq(0).hide();
 
     // When click on the arrow the indicator will rotate 90 horizontally
     // The click() method attaches an event handler function to an HTML element
