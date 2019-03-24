@@ -1,40 +1,39 @@
 // requestAnim shim layer by Paul Irish
-    window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       || 
-              window.webkitRequestAnimationFrame || 
-              window.mozRequestAnimationFrame    || 
-              window.oRequestAnimationFrame      || 
-              window.msRequestAnimationFrame     || 
-              function(/* function */ callback, /* DOMElement */ element){
-                window.setTimeout(callback, 1000 / 60);
-              };
-    })();
-  
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame    ||
+        window.oRequestAnimationFrame      ||
+        window.msRequestAnimationFrame     ||
+        function(/* function */ callback, /* DOMElement */ element){
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
 
 // example code from mr doob : http://mrdoob.com/lab/javascript/requestanimationframe/
 
 animate();
 
+let mLastFrameTime = 0;
 let mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
-	var currentTime = new Date().getTime();
-	if (mLastFrameTime === 0) {
-		mLastFrameTime = currentTime;
-	}
+    var currentTime = new Date().getTime();
+    if (mLastFrameTime === 0) {
+        mLastFrameTime = currentTime;
+    }
 
-	if ((currentTime - mLastFrameTime) > mWaitTime) {
-		swapPhoto();
-		mLastFrameTime = currentTime;
-	}
+    if ((currentTime - mLastFrameTime) > mWaitTime) {
+        swapPhoto();
+        mLastFrameTime = currentTime;
+    }
 }
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 // Counter for the mImages array
 let mCurrentIndex = 0;
-
-let mLastFrameTime = 0;
 
 // Array holding GalleryImage objects (see below).
 let mImages = [];
