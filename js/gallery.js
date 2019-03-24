@@ -19,7 +19,7 @@ let mLastFrameTime = 0;
 let mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
-    var currentTime = new Date().getTime();
+    let currentTime = new Date().getTime();
     if (mLastFrameTime === 0) {
         mLastFrameTime = currentTime;
     }
@@ -60,7 +60,7 @@ function swapPhoto() {
     // Ex: .location is a class accessing from HTML file
     // .text is a property that will set or return text value
     // Ex: It will get the text from the image file and will display on web based on the image is selected
-    $(".imgLocation").text("Location: "+mImages[mCurrentIndex].imgLocation);
+    $(".location").text("Location: "+mImages[mCurrentIndex].imgLocation);
     $(".description").text("Description: "+mImages[mCurrentIndex].description);
     $(".date").text("Date: "+mImages[mCurrentIndex].date);
 
