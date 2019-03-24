@@ -94,7 +94,7 @@ if($_GET["json"] == undefined) {
 
 let mRequest = new XMLHttpRequest();
 mRequest.onreadystatechange = function() {
-    if (mRequest.readyState === 4 && mRequest.status === 200){
+    if (mRequest.readyState == 4 && mRequest.status === 200){
         try{
             mJson = JSON.parse(mRequest.responseText);
             console.log(mJson);
