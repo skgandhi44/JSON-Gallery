@@ -79,7 +79,7 @@ let $_GET = getQueryLocation(document.location.search);
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 // The if and else statement checks if either one json file become true
 let mUrl;
-if($_GET["json"] === undefined) {
+if($_GET["json"] == undefined) {
     mUrl = "images.short.json";
 } else {
     mUrl = $_GET["json"];
