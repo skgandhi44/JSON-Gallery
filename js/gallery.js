@@ -15,11 +15,11 @@ window.requestAnimFrame = (function(){
 
 animate();
 
-let mLastFrameTime = 0;
-let mWaitTime = 5000; //time in ms
+var mLastFrameTime = 0;
+var mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
-    let currentTime = new Date().getTime();
+    var currentTime = new Date().getTime();
     if (mLastFrameTime === 0) {
         mLastFrameTime = currentTime;
     }
@@ -33,13 +33,13 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 // Counter for the mImages array
-let mCurrentIndex = 0;
+var mCurrentIndex = 0;
 
 // Array holding GalleryImage objects (see below).
-let mImages = [];
+var mImages = [];
 
 // Holds the retrieved JSON information
-let mJson;
+var mJson;
 
 
 
@@ -72,19 +72,27 @@ function swapPhoto() {
 	console.log('swap photo');
 }
 
+function getQueryLocation(ql) {
+    ql = ql.split("+").join(" ");
+    var queryLocation = {}, tokens,
+        re = /[?&]?([^=]+)=([^&]*)/g;
 
+    while (tokens = re.exec(ql)){
+        queryLocation[decodeURIComponent(tokens(1))] = decodeURIComponent(tokens(2));
+    }
+
+    return queryLocation;
+}
 // Requesting $_GET variable
-let $_GET = getQueryLocation(document.location.search);
+var $_GET = getQueryLocation(document.location.search);
+
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 // The if and else statement checks if either one json file become true
-let mUrl;
-if($_GET["json"] == undefined) {
-    mUrl = "images.short.json";
-} else {
-    mUrl = $_GET["json"];
-}
+var mUrl = 'images.json';
 
+
+console.log(mUrl);
 
 // XMLHttpRequest variable
 // Property contains the event handler to be called when the readystatechange event is fired
@@ -92,7 +100,7 @@ if($_GET["json"] == undefined) {
 // mRequest will fetch information about the image.
 // Create a JSON object that contains the retrieved JSON string, a list of photo URL
 
-let mRequest = new XMLHttpRequest();
+var mRequest = new XMLHttpRequest();
 mRequest.onreadystatechange = function() {
     if (mRequest.readyState == 4 && mRequest.status == 200){
         try{
@@ -104,7 +112,7 @@ mRequest.onreadystatechange = function() {
             // and push() the description on the page
             // mJson.images[i] is an array which starts from 0
             // Push() add thing
-            for (let i = 0; i < mJson.images.length; i++) {
+            for (var i = 0; i < mJson.images.length; i++) {
                 mImages.push(new GalleryImage(mJson.images[i].imgLocation, mJson.images[i].description,
                     mJson.images[i].date, mJson.images[i].imgPath));
             }
@@ -132,8 +140,6 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 	}
 }
 
-makeGalleryImageOnloadCallback();
-
 
 $(document).ready( function() {
     //this initially hides the photos' metadata information
@@ -158,8 +164,8 @@ $(document).ready( function() {
 
     $("#prevPhoto").click(function(){
         mCurrentIndex -= 2;
-        swapPhoto();
         console.log(mCurrentIndex);
+        swapPhoto();
     });
 
 });
