@@ -38,9 +38,12 @@ var mCurrentIndex = 0;
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
+var mRequest = new XMLHttpRequest();
+
 // Holds the retrieved JSON information
 var mJson;
 
+var mUrl;
 
 
 function swapPhoto() {
@@ -74,11 +77,10 @@ function swapPhoto() {
 
 function getQueryLocation(ql) {
     ql = ql.split("+").join(" ");
-    var queryLocation = {}, tokens,
-        re = /[?&]?([^=]+)=([^&]*)/g;
+    var queryLocation = {}, tokens, re = /[?&]?([^=]+)=([^&]*)/g;
 
     while (tokens = re.exec(ql)){
-        queryLocation[decodeURIComponent(tokens(1))] = decodeURIComponent(tokens(2));
+        queryLocation[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
     }
 
     return queryLocation;
@@ -89,10 +91,12 @@ var $_GET = getQueryLocation(document.location.search);
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 // The if and else statement checks if either one json file become true
-var mUrl = 'images.json';
+if($_GET["json"] == undefined) {
+    mUrl = "images.json";
+} else {
+    mUrl = $_GET["json"];
+}
 
-
-console.log(mUrl);
 
 // XMLHttpRequest variable
 // Property contains the event handler to be called when the readystatechange event is fired
@@ -100,7 +104,6 @@ console.log(mUrl);
 // mRequest will fetch information about the image.
 // Create a JSON object that contains the retrieved JSON string, a list of photo URL
 
-var mRequest = new XMLHttpRequest();
 mRequest.onreadystatechange = function() {
     if (mRequest.readyState == 4 && mRequest.status == 200){
         try{
